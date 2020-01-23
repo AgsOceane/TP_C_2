@@ -31,9 +31,11 @@ int main(){
          
           //On essaie de tirer les actions du monstre au hasard en faisant 1 ou 2
                 int monsterBehaviour = rand()%3 + 1;
-                if (manaMonster < 10 && monsterBehaviour == 3){
+                if (manaMonster < 10 && monsterBehaviour == 3 || playerState == 78){
                 monsterBehaviour = rand()%2 + 1;
                 }
+		 //Si le joueur est déjà emposoisonné faire que le monstre attque ou défende
+		 
          //Une fois par tour le monstre perdra 5pv que si le joueur l'a empoisonné une fois
          
                 manaPlayer = manaPlayer + 1;
@@ -46,7 +48,7 @@ int main(){
                     printf("The monster is poisoned, he lost 5Lp \n, he is now %d\n",curMonsterLp);
                 }
                 
-                if (playerState == 50 && manaMonster >= 10){
+                if (playerState == 78 && manaMonster >= 10){
                     manaMonster = manaMonster - useMana;
                     curHealth = curHealth - poison;
                     printf("You are poisoned, you lost 5Lp \n, you're now %d",curHealth);
@@ -61,7 +63,7 @@ int main(){
                 switch (actionPlayer){
                          
                 default:
-                printf("You didn't tape a correct number, nothing happened");
+                printf("You didn't tape a correct number, nothing happened\n");
                 break;
                         
                 case 4:
@@ -79,8 +81,8 @@ int main(){
                 break;
                 
                 case 7:
-                if (playerState == 50 && manaPlayer >= 10){
-                    playerState = 0;
+                if (playerState == 78 && manaPlayer >= 10){
+                    playerState = 42;
                     printf("You're healed !\n\n");
                 }
                 break;
@@ -111,11 +113,11 @@ int main(){
                 
                 case 3:
                 printf("The monster poisoned you, you will loose 5lp per turn \n");
-                playerState = 50;
+                playerState = 78;
                 break;
                         
                 default:
-                printf("You didn't tape a correct number, nothing happened");
+                printf("You didn't tape a correct number, nothing happened\n");
                 break;
 
 
